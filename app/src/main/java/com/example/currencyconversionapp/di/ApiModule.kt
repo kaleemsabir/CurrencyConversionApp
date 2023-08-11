@@ -24,7 +24,6 @@ class ApiModule {
     @Provides
     fun providesRetrofit(): Retrofit {
         return Retrofit.Builder().baseUrl(BuildConfig.BASE_URL)
-            .client(getHTTPClient())
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
@@ -42,18 +41,4 @@ class ApiModule {
         return currencyConversionRepoImpl
     }
 
-    private fun getHTTPClient(): OkHttpClient {
-        val httpClient = OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(10, TimeUnit.SECONDS).writeTimeout(10, TimeUnit.SECONDS)
-
-        httpClient.addInterceptor { chain ->
-            val request = chain.request()
-            val builder = request.newBuilder()
-
-
-            chain.proceed(builder.build())
-        }
-
-        return httpClient.build()
-    }
 }

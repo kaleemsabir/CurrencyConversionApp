@@ -1,5 +1,6 @@
 package com.example.currencyconversionapp.data.remote
 
+import com.example.currencyconversionapp.BuildConfig
 import com.example.currencyconversionapp.network.ApiInterface
 import com.example.currencyconversionapp.utils.Response
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,7 @@ class CurrencyConversionAppRepoImp @Inject constructor(private val apiInterface:
     override fun getCurrencyRates() = flow {
         emit(Response.Loading)
         runCatching {
-            apiInterface.getCurrencyRates()
+            apiInterface.getCurrencyRates(BuildConfig.Conversion_App_Id)
         }.onSuccess { response ->
             emit(Response.Success(response))
         }.onFailure {
