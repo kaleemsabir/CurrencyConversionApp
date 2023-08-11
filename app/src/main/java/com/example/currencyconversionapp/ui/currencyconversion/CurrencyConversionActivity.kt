@@ -2,6 +2,7 @@ package com.example.currencyconversionapp.ui.currencyconversion
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.lifecycleScope
 import com.example.currencyconversionapp.R
@@ -12,6 +13,10 @@ import com.example.currencyconversionapp.ui.currencyconversion.adapter.CurrencyC
 import com.example.currencyconversionapp.ui.currencyconversion.adapter.DropDownAdapter
 import com.example.currencyconversionapp.ui.currencyconversion.viewmodel.CurrencyConversionViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -39,10 +44,11 @@ class CurrencyConversionActivity :
     }
 
     private fun initObservers() {
-        initProgressObserver()
+        initObserver()
+        initErrorObserver()
         initDataObserver()
     }
-    private fun initProgressObserver() {
+    private fun initObserver() {
         lifecycleScope.launch {
             viewModel?.progressBar?.collect {
                 when {
@@ -54,12 +60,28 @@ class CurrencyConversionActivity :
                     }
                 }
             }
+
         }
+
+    }
+    private fun initErrorObserver(){
+        viewModel?.errorLive?.observe(this) {
+                Toast.makeText(this@CurrencyConversionActivity, getString(it), Toast.LENGTH_LONG)
+                    .show()
+            }
+
+
     }
     private fun initDataObserver() {
         lifecycleScope.launch {
             viewModel?.conversionRates?.collect {
                 setCurrencyListData(it)
+            }
+
+        }
+        lifecycleScope.launch {
+            viewModel?.conversionRatesAfterChanging?.collect {
+                currencyConversionAdapter.submitList(it)
             }
         }
     }
@@ -70,6 +92,7 @@ class CurrencyConversionActivity :
                 setAdapter(DropDownAdapter(list, this@CurrencyConversionActivity) { item ->
                     dismissDropDown()
                     setText(item.currencyName)
+                    viewModel?.selectedConversionModel = item
                 })
             }
             currencyConversionAdapter.submitList(list)

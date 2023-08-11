@@ -1,10 +1,15 @@
 package com.example.currencyconversionapp.ui.currencyconversion.viewmodel
 
+
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.data.local.models.ConversionRatesDbModel
 import com.example.currencyconversionapp.repo.AppDataManager
+import com.example.currencyconversionapp.utils.ConversionUtils
 import com.example.currencyconversionapp.utils.Extensions.toCurrencyRatesToDbModel
+import com.example.currencyconversionapp.utils.Extensions.toRound2Decimal
 import com.example.currencyconversionapp.utils.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -23,7 +28,15 @@ class CurrencyConversionViewModel @Inject constructor(private val repository: Ap
 
     // Created State Flow for the Currency rate  List.
     private val _conversionRates = MutableStateFlow(emptyList<ConversionRatesDbModel>())
+
     val conversionRates = _conversionRates.asStateFlow()
+    private val _conversionRatesAfterChanging = MutableStateFlow(emptyList<ConversionRatesDbModel>())
+    val conversionRatesAfterChanging = _conversionRatesAfterChanging.asStateFlow()
+
+    val errorLive = MutableLiveData<Int>()
+
+     var amount = MutableLiveData<String>()
+     var selectedConversionModel : ConversionRatesDbModel? = null
 
     init {
         fetchCurrencyConversion()
@@ -66,6 +79,28 @@ class CurrencyConversionViewModel @Inject constructor(private val repository: Ap
         CoroutineScope(Dispatchers.IO).launch {
             repository.getAppDatabaseHelper().saveConversionRatesList(ratesList)
         }
+    }
+
+     fun convertCurrency(){
+        if(amount.value.isNullOrEmpty()){
+            errorLive.value = R.string.enter_the_conversion_amount
+            return
+        } else if(selectedConversionModel == null){
+            errorLive.value = R.string.select_the_conversion_model
+            return
+        }
+
+      viewModelScope.launch(Dispatchers.Default){
+          val tempList: MutableList<ConversionRatesDbModel> = ArrayList()
+          _conversionRates.let {  conversionRates->
+              conversionRates.value.forEach {
+                val newCurrencyRate =  ConversionUtils.convertCurrencyToSelectedCurrency(it.currencyRate,selectedConversionModel!!.currencyRate)
+                val totalCurrencyRate = ConversionUtils.convertCurrencyToRequiredAmount(newCurrencyRate,amount!!.value!!.toDouble())
+                  tempList.add(ConversionRatesDbModel(currencyName = it.currencyName, currencyRate = totalCurrencyRate.toRound2Decimal()))
+              }
+          }
+          _conversionRatesAfterChanging.value = tempList
+      }
     }
 
 
