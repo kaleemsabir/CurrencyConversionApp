@@ -1,25 +1,25 @@
 package com.example.currencyconversionapp.ui.currencyconversion
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.databinding.library.baseAdapters.BR
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.data.local.models.ConversionRatesDbModel
 import com.example.currencyconversionapp.databinding.ActivityCurrencyConversionBinding
 import com.example.currencyconversionapp.ui.base.BaseActivity
+import com.example.currencyconversionapp.ui.currencyconversion.adapter.CurrencyConversionAdapter
 import com.example.currencyconversionapp.ui.currencyconversion.adapter.DropDownAdapter
 import com.example.currencyconversionapp.ui.currencyconversion.viewmodel.CurrencyConversionViewModel
-import com.example.currencyconversionapp.utils.Extensions.toCurrencyRatesToDbModel
-import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CurrencyConversionActivity :
     BaseActivity<ActivityCurrencyConversionBinding, CurrencyConversionViewModel>() {
+    private val currencyConversionAdapter by lazy {
+        CurrencyConversionAdapter()
+    }
 
     override fun getBindingVariable(): Int {
         return BR.viewModel
@@ -59,17 +59,22 @@ class CurrencyConversionActivity :
     private fun initDataObserver() {
         lifecycleScope.launch {
             viewModel?.conversionRates?.collect {
-                setCurrencyListInDropDown(it)
+                setCurrencyListData(it)
             }
         }
     }
 
-    private fun setCurrencyListInDropDown(list : List<ConversionRatesDbModel>) {
-        binding?.tvSelectCurrencyRate?.apply {
-            setAdapter(DropDownAdapter(list, this@CurrencyConversionActivity) { item ->
-                dismissDropDown()
-                setText(item.currencyName)
-            })
+    private fun setCurrencyListData(list : List<ConversionRatesDbModel>) {
+        binding?.apply {
+            tvSelectCurrencyRate.apply {
+                setAdapter(DropDownAdapter(list, this@CurrencyConversionActivity) { item ->
+                    dismissDropDown()
+                    setText(item.currencyName)
+                })
+            }
+            currencyConversionAdapter.submitList(list)
+            adapter = currencyConversionAdapter
+
         }
     }
 

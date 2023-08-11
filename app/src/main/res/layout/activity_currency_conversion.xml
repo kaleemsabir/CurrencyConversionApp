@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewModel"
             type="com.example.currencyconversionapp.ui.currencyconversion.viewmodel.CurrencyConversionViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.example.currencyconversionapp.ui.currencyconversion.adapter.CurrencyConversionAdapter" />
+
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,6 +27,7 @@
         android:background="@drawable/bg_currency_conversion_input"/>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dropdownCurrencyLabel"
         style="@style/InputStyle.Border.DropDown"
         android:hint="@string/select_currency_rate"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -32,6 +38,20 @@
             style="@style/InputLayout.TextView.Medium.Regular"
             />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        adapter="@{adapter}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        tools:itemCount="15"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dropdownCurrencyLabel"
+        tools:listitem="@layout/item_currency_conversion" />
 
 
     <ProgressBar

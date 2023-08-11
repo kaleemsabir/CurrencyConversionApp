@@ -7,5 +7,4 @@
     <dimen name="input_text_height">50dp</dimen>
     <dimen name="text_size_m_sp">14sp</dimen>
 
-    <!-- Default screen margins, per the Android Design guidelines. -->
 </resources>
