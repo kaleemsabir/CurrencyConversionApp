@@ -3,7 +3,6 @@ package com.example.currencyconversionapp.ui.currencyconversion.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.currencyconversionapp.data.local.models.ConversionRatesDbModel
-import com.example.currencyconversionapp.model.ConversionRateResponse
 import com.example.currencyconversionapp.repo.AppDataManager
 import com.example.currencyconversionapp.utils.Extensions.toCurrencyRatesToDbModel
 import com.example.currencyconversionapp.utils.Response
@@ -23,7 +22,7 @@ class CurrencyConversionViewModel @Inject constructor(private val repository: Ap
     val progressBar = _progressBar.asStateFlow()
 
     // Created State Flow for the Currency rate  List.
-    private val _conversionRates = MutableStateFlow(ConversionRateResponse.Default)
+    private val _conversionRates = MutableStateFlow(emptyList<ConversionRatesDbModel>())
     val conversionRates = _conversionRates.asStateFlow()
 
     init {
@@ -32,6 +31,19 @@ class CurrencyConversionViewModel @Inject constructor(private val repository: Ap
 
     private fun fetchCurrencyConversion(){
         viewModelScope.launch {
+            repository.getAppDatabaseHelper().getConversionRatesList().collect{
+                if(it.isNotEmpty()){
+                    _conversionRates.value = it
+                }else{
+                    fetchCurrencyFromNetwork()
+                }
+            }
+        }
+
+    }
+
+    private fun fetchCurrencyFromNetwork() {
+        viewModelScope.launch {
             repository.getApiRepo().getCurrencyRates().collect{ response->
                 when(response){
                     is Response.Loading ->{
@@ -39,7 +51,8 @@ class CurrencyConversionViewModel @Inject constructor(private val repository: Ap
                     }
                     is Response.Success ->{
                         _progressBar.value = false
-                        _conversionRates.value = response.item
+                        _conversionRates.value = response.item.toCurrencyRatesToDbModel()
+                        saveCurrencyListInDb(_conversionRates.value)
                     }
                     is Response.Error ->{
                         _progressBar.value = false
@@ -49,7 +62,7 @@ class CurrencyConversionViewModel @Inject constructor(private val repository: Ap
         }
     }
 
-    fun saveCurrencyListInDb(ratesList: List<ConversionRatesDbModel>){
+    private fun saveCurrencyListInDb(ratesList: List<ConversionRatesDbModel>){
         CoroutineScope(Dispatchers.IO).launch {
             repository.getAppDatabaseHelper().saveConversionRatesList(ratesList)
         }

@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class ConversionRateResponse(
     val timestamp: Int,
     val base: String,
-    val rates: HashMap<String, Double>
+    var rates: HashMap<String, Double>
 ):Parcelable{
     companion object {
         val Default= ConversionRateResponse(0,"", HashMap())
