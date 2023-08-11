@@ -6,5 +6,5 @@ import com.example.currencyconversionapp.utils.Response
 import kotlinx.coroutines.flow.Flow
 
 interface CurrencyConversionAppRepo {
-    fun  getCurrencyRates(): Flow<Response<List<ConversionRateResponse>>>
+    fun  getCurrencyRates(): Flow<Response<ConversionRateResponse>>
 }
