@@ -34,6 +34,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "Conversion_App_Id", "\"${getProperty("api_keys.properties", "convserions_app_id")}\""
+
     }
 
     buildTypes {
@@ -123,5 +125,9 @@ dependencies {
     def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    // splash
+    def splashVersion = '1.0.0'
+    implementation "androidx.core:core-splashscreen:$splashVersion"
 
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.currencyconversionapp.ui.currencyconversion.viewmodel.CurrencyConversionViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/etInput"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/input_text_height"
+        android:inputType="numberDecimal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/margin_default"
+        android:padding="@dimen/margin_default"
+        android:background="@drawable/bg_currency_conversion_input"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/InputStyle.Border.DropDown"
+        android:hint="@string/select_currency_rate"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etInput">
+        <AutoCompleteTextView
+            android:id="@+id/tvSelectCurrencyRate"
+            style="@style/InputLayout.TextView.Medium.Regular"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
