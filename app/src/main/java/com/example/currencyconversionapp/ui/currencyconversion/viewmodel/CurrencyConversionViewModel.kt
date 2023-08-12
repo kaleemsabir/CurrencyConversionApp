@@ -1,7 +1,6 @@
 package com.example.currencyconversionapp.ui.currencyconversion.viewmodel
 
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -108,7 +107,7 @@ class CurrencyConversionViewModel @Inject constructor(private val repository: Ap
                     )
                     val totalCurrencyRate = ConversionUtils.convertCurrencyToRequiredAmount(
                         newCurrencyRate,
-                        amount!!.value!!.toDouble()
+                        amount.value!!.toDouble()
                     )
                     tempList.add(
                         ConversionRatesDbModel(
