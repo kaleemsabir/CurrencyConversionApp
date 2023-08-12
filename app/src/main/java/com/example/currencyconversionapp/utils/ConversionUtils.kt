@@ -1,5 +1,7 @@
 package com.example.currencyconversionapp.utils
 
+import java.util.concurrent.TimeUnit
+
 object ConversionUtils {
 
     fun convertCurrencyToSelectedCurrency(currency: Double, selectedCurrency: Double) =
@@ -14,9 +16,9 @@ object ConversionUtils {
 
         val timeDifferenceMillis = currentTimeMillis - timeStamp
 
-        val twentyFourHoursInMillis = 86400000L
+        val thirtyMinutesInMillis: Long = TimeUnit.MINUTES.toMillis(30)
 
-        return timeDifferenceMillis >= twentyFourHoursInMillis
+        return timeDifferenceMillis >= thirtyMinutesInMillis
 
     }
 
