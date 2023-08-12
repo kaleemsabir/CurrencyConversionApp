@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.currencyconversionapp.data.local.models.ConversionRatesDbModel
+import com.example.currencyconversionapp.data.local.db.models.ConversionRatesDbModel
 import com.example.currencyconversionapp.databinding.ItemCurrencyConversionBinding
 import com.example.currencyconversionapp.utils.CurrencyAdapterDiff
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.example.currencyconversionapp.data.local.models
+package com.example.currencyconversionapp.data.local.db.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

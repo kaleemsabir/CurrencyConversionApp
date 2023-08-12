@@ -1,6 +1,6 @@
 package com.example.currencyconversionapp.data.local.helper
 
-import com.example.currencyconversionapp.data.local.models.ConversionRatesDbModel
+import com.example.currencyconversionapp.data.local.db.models.ConversionRatesDbModel
 import kotlinx.coroutines.flow.Flow
 
 interface CurrencyConversionAppDbHelper {

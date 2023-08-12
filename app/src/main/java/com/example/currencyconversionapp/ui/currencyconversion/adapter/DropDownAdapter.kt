@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Filter
 import android.widget.TextView
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.data.local.models.ConversionRatesDbModel
+import com.example.currencyconversionapp.data.local.db.models.ConversionRatesDbModel
 
 
 class DropDownAdapter(

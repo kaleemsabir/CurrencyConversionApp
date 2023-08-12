@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.currencyconversionapp.data.local.models.ConversionRatesDbModel
+import com.example.currencyconversionapp.data.local.db.models.ConversionRatesDbModel
 import com.example.currencyconversionapp.utils.Constants
 import kotlinx.coroutines.flow.Flow
 

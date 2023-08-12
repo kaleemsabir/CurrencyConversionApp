@@ -1,7 +1,7 @@
 package com.example.currencyconversionapp.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.currencyconversionapp.data.local.models.ConversionRatesDbModel
+import com.example.currencyconversionapp.data.local.db.models.ConversionRatesDbModel
 
 object CurrencyAdapterDiff : DiffUtil.ItemCallback<ConversionRatesDbModel>() {
 

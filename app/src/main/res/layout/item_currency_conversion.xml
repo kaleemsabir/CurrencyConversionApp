@@ -3,7 +3,7 @@
     <data>
         <variable
             name="data"
-            type="com.example.currencyconversionapp.data.local.models.ConversionRatesDbModel" />
+            type="com.example.currencyconversionapp.data.local.db.models.ConversionRatesDbModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"

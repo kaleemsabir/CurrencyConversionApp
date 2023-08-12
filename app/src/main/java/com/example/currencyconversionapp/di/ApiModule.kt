@@ -3,6 +3,8 @@ package com.example.currencyconversionapp.di
 import com.example.currencyconversionapp.BuildConfig
 import com.example.currencyconversionapp.data.local.helper.CurrencyConversionAppDbHelper
 import com.example.currencyconversionapp.data.local.helper.CurrencyConversionAppDbHelperImpl
+import com.example.currencyconversionapp.data.local.prefs.AppPrefHelper
+import com.example.currencyconversionapp.data.local.prefs.AppPrefHelperImp
 import com.example.currencyconversionapp.data.remote.CurrencyConversionAppRepo
 import com.example.currencyconversionapp.data.remote.CurrencyConversionAppRepoImp
 import com.example.currencyconversionapp.network.ApiInterface
@@ -40,5 +42,7 @@ class ApiModule {
     fun provideCurrencyConversionRepo(currencyConversionRepoImpl: CurrencyConversionAppRepoImp): CurrencyConversionAppRepo {
         return currencyConversionRepoImpl
     }
+
+
 
 }

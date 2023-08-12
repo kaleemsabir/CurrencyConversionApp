@@ -1,6 +1,6 @@
 package com.example.currencyconversionapp.utils
 
-import com.example.currencyconversionapp.data.local.models.ConversionRatesDbModel
+import com.example.currencyconversionapp.data.local.db.models.ConversionRatesDbModel
 import com.example.currencyconversionapp.model.ConversionRateResponse
 import java.math.RoundingMode
 import java.text.DecimalFormat

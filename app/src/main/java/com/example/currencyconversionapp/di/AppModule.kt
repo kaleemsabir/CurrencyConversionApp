@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import com.example.currencyconversionapp.data.local.helper.CurrencyConversionAppDbHelper
 import com.example.currencyconversionapp.data.local.helper.CurrencyConversionAppDbHelperImpl
+import com.example.currencyconversionapp.data.local.prefs.AppPrefHelper
+import com.example.currencyconversionapp.data.local.prefs.AppPrefHelperImp
 import com.example.currencyconversionapp.repo.AppDataManager
 import com.example.currencyconversionapp.repo.AppDataManagerImpl
 import dagger.Module
@@ -32,6 +34,12 @@ class AppModule {
     @Provides
     fun provideAppDbHelper(dbHelperImpl: CurrencyConversionAppDbHelperImpl): CurrencyConversionAppDbHelper {
         return dbHelperImpl
+    }
+
+    @Singleton
+    @Provides
+    fun providePreferencesHelper(appPreferencesHelper: AppPrefHelperImp): AppPrefHelper {
+        return appPreferencesHelper
     }
 
 }

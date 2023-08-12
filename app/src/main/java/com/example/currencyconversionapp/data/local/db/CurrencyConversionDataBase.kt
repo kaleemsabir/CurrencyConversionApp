@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.currencyconversionapp.data.local.dao.CurrencyConversionDao
-import com.example.currencyconversionapp.data.local.models.ConversionRatesDbModel
+import com.example.currencyconversionapp.data.local.db.models.ConversionRatesDbModel
 import com.example.currencyconversionapp.utils.Constants
 
 @Database(entities = [ConversionRatesDbModel::class], version = 1, exportSchema = false)

@@ -6,17 +6,13 @@ import android.widget.Toast
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.lifecycleScope
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.data.local.models.ConversionRatesDbModel
+import com.example.currencyconversionapp.data.local.db.models.ConversionRatesDbModel
 import com.example.currencyconversionapp.databinding.ActivityCurrencyConversionBinding
 import com.example.currencyconversionapp.ui.base.BaseActivity
 import com.example.currencyconversionapp.ui.currencyconversion.adapter.CurrencyConversionAdapter
 import com.example.currencyconversionapp.ui.currencyconversion.adapter.DropDownAdapter
 import com.example.currencyconversionapp.ui.currencyconversion.viewmodel.CurrencyConversionViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
