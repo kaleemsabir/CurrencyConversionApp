@@ -47,7 +47,7 @@ class CurrencyConversionViewModel @Inject constructor(private val repository: Ap
     private fun fetchCurrencyConversion() {
         viewModelScope.launch {
             if (ConversionUtils.isTimePassesForFetchData(
-                    repository.getAppPreferences().getTimeStamp())) {
+                    repository.getAppPreferences().getTimeStamp(),System.currentTimeMillis())) {
                 fetchCurrencyFromNetwork()
             } else {
                 repository.getAppDatabaseHelper().getConversionRatesList().collect {
