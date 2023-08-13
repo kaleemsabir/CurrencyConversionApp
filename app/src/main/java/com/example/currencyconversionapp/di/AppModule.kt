@@ -1,49 +1,45 @@
 package com.example.currencyconversionapp.di
 
+import android.app.Application
 import android.content.Context
-import com.example.currencyconversionapp.BuildConfig
-import com.example.currencyconversionapp.data.local.db.CurrencyConversionDataBase
-import com.example.currencyconversionapp.data.remote.CurrencyConversionAppRepo
-import com.example.currencyconversionapp.data.remote.CurrencyConversionAppRepoImp
-import com.example.currencyconversionapp.network.ApiInterface
+import com.example.currencyconversionapp.data.local.helper.CurrencyConversionAppDbHelper
+import com.example.currencyconversionapp.data.local.db.helper.CurrencyConversionAppDbHelperImpl
+import com.example.currencyconversionapp.data.local.prefs.AppPrefHelper
+import com.example.currencyconversionapp.data.local.prefs.AppPrefHelperImp
+import com.example.currencyconversionapp.repo.AppDataManager
+import com.example.currencyconversionapp.repo.AppDataManagerImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 class AppModule {
 
-    // Provides Retrofit Client
-
-    @Singleton
     @Provides
-    fun providesRetrofit(): Retrofit {
-        return Retrofit.Builder().baseUrl(BuildConfig.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create()).build()
+    @Singleton
+    fun provideAppDataManager(dataManagerImpl: AppDataManagerImpl): AppDataManager {
+        return dataManagerImpl
     }
 
-    // Provides Api Interface.
-
     @Singleton
     @Provides
-    fun providesApiInterface(retrofit: Retrofit): ApiInterface {
-        return retrofit.create(ApiInterface::class.java)
+    fun provideContext(application: Application): Context {
+        return application
     }
 
-
-    // Provides currency conversion app Repository.
     @Singleton
     @Provides
-    fun providesCurrencyConversionAppRepo(apiInterface: ApiInterface): CurrencyConversionAppRepo = CurrencyConversionAppRepoImp(apiInterface)
+    fun provideAppDbHelper(dbHelperImpl: CurrencyConversionAppDbHelperImpl): CurrencyConversionAppDbHelper {
+        return dbHelperImpl
+    }
 
     @Singleton
     @Provides
-    fun provideCurrencyAppDatabase(@ApplicationContext context: Context) =
-        CurrencyConversionDataBase.getInstance(context)
+    fun providePreferencesHelper(appPreferencesHelper: AppPrefHelperImp): AppPrefHelper {
+        return appPreferencesHelper
+    }
+
 }

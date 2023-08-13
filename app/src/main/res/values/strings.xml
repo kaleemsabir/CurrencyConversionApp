@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CurrencyConversionApp</string>
+    <string name="select_currency_rate">Select currency rate</string>
+    <string name="enter_amount_hint">Enter the amount</string>
+    <string name="convert_text">Convert</string>
+    <string name="enter_the_conversion_amount">Please enter the conversion amount</string>
+    <string name="select_the_conversion_model">Please select the conversion model</string>
 </resources>

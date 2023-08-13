@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.currencyconversionapp.ui.currencyconversion.viewmodel.CurrencyConversionViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.example.currencyconversionapp.ui.currencyconversion.adapter.CurrencyConversionAdapter" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/etInput"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/input_text_height"
+            android:layout_margin="@dimen/margin_default"
+            android:background="@drawable/bg_currency_conversion_input"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/margin_default"
+            android:hint="@string/enter_amount_hint"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btnConvert"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="@dimen/margin_default"
+            android:text="@={viewModel.amount}"/>
+        <Button
+            android:id ="@+id/btnConvert"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/etInput"
+            app:layout_constraintBottom_toBottomOf="@+id/etInput"
+            android:text="@string/convert_text"
+            android:onClick="@{()->viewModel.convertCurrency()}"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dropdownCurrencyLabel"
+            style="@style/InputStyle.Border.DropDown"
+            android:hint="@string/select_currency_rate"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etInput">
+
+            <AutoCompleteTextView
+                android:id="@+id/tvSelectCurrencyRate"
+                style="@style/InputLayout.TextView.Medium.Regular" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            adapter="@{adapter}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dropdownCurrencyLabel"
+            app:spanCount="2"
+            tools:itemCount="15"
+            tools:listitem="@layout/item_currency_conversion" />
+
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
