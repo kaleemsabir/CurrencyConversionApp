@@ -6,7 +6,7 @@ import java.math.RoundingMode
 import java.text.DecimalFormat
 
 object Extensions {
-    fun ConversionRateResponse.toCurrencyRatesToDbModel() = this.rates.map { (key, value) ->
+    fun ConversionRateResponse.toCurrencyRatesToDbModel(): List<ConversionRatesDbModel> = this.rates.map { (key, value) ->
         ConversionRatesDbModel(
             currencyName = key, currencyRate = value.toRound2Decimal()
         )
