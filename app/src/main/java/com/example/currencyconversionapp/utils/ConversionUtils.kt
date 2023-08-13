@@ -1,15 +1,15 @@
 package com.example.currencyconversionapp.utils
 
-import com.example.currencyconversionapp.utils.Extensions.toRound2Decimal
+import com.example.currencyconversionapp.utils.Extensions.toRoundDecimal
 import java.util.concurrent.TimeUnit
 
 object ConversionUtils {
 
     fun convertCurrencyToSelectedCurrency(currency: Double, selectedCurrency: Double) =
-        (currency / selectedCurrency).toRound2Decimal()
+        (currency / selectedCurrency).toRoundDecimal()
 
     fun convertCurrencyToRequiredAmount(currency: Double, amount: Double) =
-        (currency *  amount).toRound2Decimal()
+        (currency *  amount).toRoundDecimal()
 
     fun isTimePassesForFetchData(timeStamp: Long,currentTimeStamp : Long): Boolean {
 

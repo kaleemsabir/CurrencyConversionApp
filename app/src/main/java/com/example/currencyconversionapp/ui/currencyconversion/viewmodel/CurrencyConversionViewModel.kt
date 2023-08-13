@@ -9,7 +9,7 @@ import com.example.currencyconversionapp.data.local.db.models.ConversionRatesDbM
 import com.example.currencyconversionapp.repo.AppDataManager
 import com.example.currencyconversionapp.utils.ConversionUtils
 import com.example.currencyconversionapp.utils.Extensions.toCurrencyRatesToDbModel
-import com.example.currencyconversionapp.utils.Extensions.toRound2Decimal
+import com.example.currencyconversionapp.utils.Extensions.toRoundDecimal
 import com.example.currencyconversionapp.utils.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -112,7 +112,7 @@ class CurrencyConversionViewModel @Inject constructor(private val repository: Ap
                     tempList.add(
                         ConversionRatesDbModel(
                             currencyName = it.currencyName,
-                            currencyRate = totalCurrencyRate.toRound2Decimal()
+                            currencyRate = totalCurrencyRate.toRoundDecimal()
                         )
                     )
                 }

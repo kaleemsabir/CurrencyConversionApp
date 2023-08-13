@@ -3,7 +3,7 @@ package com.example.currencyconversionapp.utils
 import com.example.currencyconversionapp.data.local.db.models.ConversionRatesDbModel
 import com.example.currencyconversionapp.model.ConversionRateResponse
 import com.example.currencyconversionapp.utils.Extensions.toCurrencyRatesToDbModel
-import com.example.currencyconversionapp.utils.Extensions.toRound2Decimal
+import com.example.currencyconversionapp.utils.Extensions.toRoundDecimal
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -49,9 +49,9 @@ class ExtensionsTest {
     }
 
     @Test
-    fun roundTo2DecimalTest(){
-        val input = 2.0089
-        val expected = 2.00
-        assertEquals(input.toRound2Decimal(), expected,0.0)
+    fun roundToDecimalTest(){
+        val input = 2.00895
+        val expected = 2.0089
+        assertEquals(input.toRoundDecimal(), expected,0.0)
     }
 }

@@ -1,10 +1,6 @@
 package com.example.currencyconversionapp.di
 
 import com.example.currencyconversionapp.BuildConfig
-import com.example.currencyconversionapp.data.local.helper.CurrencyConversionAppDbHelper
-import com.example.currencyconversionapp.data.local.helper.CurrencyConversionAppDbHelperImpl
-import com.example.currencyconversionapp.data.local.prefs.AppPrefHelper
-import com.example.currencyconversionapp.data.local.prefs.AppPrefHelperImp
 import com.example.currencyconversionapp.data.remote.CurrencyConversionAppRepo
 import com.example.currencyconversionapp.data.remote.CurrencyConversionAppRepoImp
 import com.example.currencyconversionapp.network.ApiInterface
@@ -12,10 +8,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
