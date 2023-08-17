@@ -1,4 +1,4 @@
-package com.example.currencyconversionapp.data.local.helper
+package com.example.currencyconversionapp.data.local.db.helper
 
 
 import com.example.currencyconversionapp.data.local.db.CurrencyConversionDataBase
@@ -9,8 +9,10 @@ import javax.inject.Singleton
 
 
 @Singleton
+// its treat as a Singleton and make object lifetime of it
+// @inject dependency should be provided by hilt
 class CurrencyConversionAppDbHelperImpl @Inject constructor(private val appDatabase: CurrencyConversionDataBase) :
-     CurrencyConversionAppDbHelper {
+    CurrencyConversionAppDbHelper {
     override suspend fun saveConversionRatesList(ratesList: List<ConversionRatesDbModel>) {
         appDatabase.currencyConversionDao().saveCurrencyRatesListToDb(ratesList)
     }
