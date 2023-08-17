@@ -10,6 +10,8 @@ import javax.inject.Singleton
 
 
 @Singleton
+// its treat as a Singleton and make object lifetime of it
+// @inject dependency should be provided by hilt
 class CurrencyConversionAppDbHelperImpl @Inject constructor(private val appDatabase: CurrencyConversionDataBase) :
     CurrencyConversionAppDbHelper {
     override suspend fun saveConversionRatesList(ratesList: List<ConversionRatesDbModel>) {
