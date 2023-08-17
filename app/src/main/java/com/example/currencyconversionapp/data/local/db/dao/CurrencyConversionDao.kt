@@ -1,4 +1,4 @@
-package com.example.currencyconversionapp.data.local.dao
+package com.example.currencyconversionapp.data.local.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -8,6 +8,7 @@ import com.example.currencyconversionapp.data.local.db.models.ConversionRatesDbM
 import com.example.currencyconversionapp.utils.Constants
 import kotlinx.coroutines.flow.Flow
 
+//class as abstract, you're following the recommended pattern for defining DAO interfaces in Room.
 @Dao
 abstract class CurrencyConversionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

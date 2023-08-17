@@ -2,7 +2,7 @@ package com.example.currencyconversionapp.di
 
 import android.app.Application
 import android.content.Context
-import com.example.currencyconversionapp.data.local.helper.CurrencyConversionAppDbHelper
+import com.example.currencyconversionapp.data.local.db.helper.CurrencyConversionAppDbHelper
 import com.example.currencyconversionapp.data.local.db.helper.CurrencyConversionAppDbHelperImpl
 import com.example.currencyconversionapp.data.local.prefs.AppPrefHelper
 import com.example.currencyconversionapp.data.local.prefs.AppPrefHelperImp

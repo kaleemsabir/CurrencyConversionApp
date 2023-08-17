@@ -1,4 +1,4 @@
-package com.example.currencyconversionapp.data.local.helper
+package com.example.currencyconversionapp.data.local.db.helper
 
 import com.example.currencyconversionapp.data.local.db.models.ConversionRatesDbModel
 import kotlinx.coroutines.flow.Flow
